@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import com.doctorlabel.model.Label;
 
 public class LabelDto {
-	private String code;
+	private String id;
 	private String description;
 	private LocalDateTime dateCreate;
 
@@ -15,13 +15,13 @@ public class LabelDto {
 	}
 
 	public LabelDto(Label label) {
-		this.code = label.getCode();
+		this.id = label.getId();
 		this.description = label.getDescription();
 		this.dateCreate = label.getDateCreate();
 	}
 
-	public String getCode() {
-		return code;
+	public String getId() {
+		return id;
 	}
 
 	public String getDescription() {

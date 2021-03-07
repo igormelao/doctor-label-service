@@ -2,12 +2,14 @@ package com.doctorlabel.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,8 +40,17 @@ public class LabelsController {
 		Label label = form.convert(labelRepository);
 		labelRepository.save(label);
 		
-		URI uri = uriBuilder.path("/labels/{id}").buildAndExpand(label.getCode()).toUri();
+		URI uri = uriBuilder.path("/labels/{id}").buildAndExpand(label.getId()).toUri();
 		return ResponseEntity.created(uri).body(new LabelDto(label));
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<LabelDto> findBy(@PathVariable String id) {
+		Optional<Label> label = labelRepository.findById(id);
+		if(label.isPresent()) {
+			return ResponseEntity.ok(new LabelDto(label.get()));
+		}
+		return ResponseEntity.notFound().build();
 	}
 	
 }
