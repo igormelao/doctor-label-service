@@ -12,21 +12,8 @@ public class UpdateLabelForm {
 
 	@NotNull
 	@NotEmpty
-	@Length(min = 3)
-	private String id;
-
-	@NotNull
-	@NotEmpty
 	@Length(min = 5)
 	private String description;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getDescription() {
 		return description;
@@ -37,7 +24,6 @@ public class UpdateLabelForm {
 	}
 
 	public Label update(Label label, LabelRepository labelRepository) {
-		label.setId(this.getId());
 		label.setDescription(this.getDescription());
 
 		return label;

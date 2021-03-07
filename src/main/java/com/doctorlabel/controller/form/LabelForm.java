@@ -8,13 +8,12 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import com.doctorlabel.model.Label;
-import com.doctorlabel.repository.LabelRepository;
 
 public class LabelForm {
 	@NotNull
 	@NotEmpty
 	@Length(min = 3)
-	private String code;
+	private String id;
 
 	@NotNull
 	@NotEmpty
@@ -23,12 +22,13 @@ public class LabelForm {
 
 	private LocalDateTime dateCreate = LocalDateTime.now();
 
-	public String getCode() {
-		return code;
+
+	public String getId() {
+		return id;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getDescription() {
@@ -39,7 +39,7 @@ public class LabelForm {
 		this.description = description;
 	}
 
-	public Label convert(LabelRepository labelRepository) {
-		return new Label(code, description, dateCreate);
+	public Label convert() {
+		return new Label(id, description, dateCreate);
 	}
 }
