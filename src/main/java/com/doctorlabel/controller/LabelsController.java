@@ -4,13 +4,16 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.doctorlabel.controller.dto.LabelDto;
 import com.doctorlabel.controller.form.LabelForm;
+import com.doctorlabel.controller.form.UpdateLabelForm;
 import com.doctorlabel.model.Label;
 import com.doctorlabel.repository.LabelRepository;
 
@@ -50,6 +54,18 @@ public class LabelsController {
 		if(label.isPresent()) {
 			return ResponseEntity.ok(new LabelDto(label.get()));
 		}
+		return ResponseEntity.notFound().build();
+	}
+	
+	@PutMapping("/{id}")
+	@Transactional
+	public ResponseEntity<LabelDto> update(@PathVariable String id, @RequestBody @Valid UpdateLabelForm form){
+		Optional<Label> optionalLabel = labelRepository.findById(id);
+		if(optionalLabel.isPresent()) {
+			Label label = form.update(optionalLabel.get(), labelRepository);
+			return ResponseEntity.ok(new LabelDto(label));
+		}
+		
 		return ResponseEntity.notFound().build();
 	}
 	
