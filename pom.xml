@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.doctorlabel</groupId>
-	<artifactId>doctorlabel</artifactId>
+	<artifactId>doctorlabel-label-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>doctorlabel</name>
+	<name>doctorlabel-label-service</name>
 	<description>Manage and persist Labels</description>
 	<properties>
 		<java.version>11</java.version>
