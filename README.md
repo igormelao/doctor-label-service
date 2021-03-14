@@ -36,3 +36,11 @@ PS: The Spring Boot will run the file inside of project data.sql and will popula
 http://localhost:8080/labels/
  
 ```
+
+``` Accessing the API Document
+ When Back-nd Microservices be runing, you can see all resources for the API through documentation generated automatically by Swagger Project on
+ 
+ # Doctor-Label-Services
+ http://localhost:8080/swagger-ui.html#
+ 
+```
